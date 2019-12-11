@@ -36,7 +36,9 @@ def remove_buzz_attrs(soup: bs4.Tag) -> bs4.Tag:
 
 
 def remove_buzz_tags(
-        soup: bs4.Tag, blacklist: Optional[List[str]] = None, unwraplist: Optional[List[str]] = None
+        soup: bs4.Tag,
+        blacklist: Optional[List[str]] = None,
+        unwraplist: Optional[List[str]] = None,
 ) -> None:
     """Remove most of tags, leaves only tags significant for text analysis."""
     if blacklist is None:

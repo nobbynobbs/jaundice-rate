@@ -1,4 +1,3 @@
-import aiohttp
 import pytest
 
 from filter.adapters import ArticleNotFound

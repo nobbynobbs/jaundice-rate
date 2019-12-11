@@ -23,7 +23,11 @@ async def fetch_article(session: aiohttp.ClientSession, url: str) -> str:
         return await response.text()
 
 
-async def rate_article(url: str, morph: pymorphy2.MorphAnalyzer, charged_words: List[str]) -> float:
+async def rate_article(
+        url: str,
+        morph: pymorphy2.MorphAnalyzer,
+        charged_words: List[str]
+) -> float:
     async with aiohttp.ClientSession() as session:
         raw_html = await fetch_article(session, url)
     article_text = sanitize(raw_html, plaintext=True)
@@ -37,7 +41,8 @@ async def rate_article(url: str, morph: pymorphy2.MorphAnalyzer, charged_words: 
 def main() -> None:
     morph = pymorphy2.MorphAnalyzer()
     charged_words = read_charged_words([
-        "filter/charged_dict/negative_words.txt", "filter/charged_dict/positive_words.txt"
+        "filter/charged_dict/negative_words.txt",
+        "filter/charged_dict/positive_words.txt",
     ])
     url = "https://inosmi.ru/economic/20190629/245384784.html"
     asyncio.run(rate_article(url, morph, charged_words))

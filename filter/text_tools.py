@@ -12,7 +12,8 @@ def _clean_word(word: str) -> str:
 
 
 def split_by_words(morph: pymorphy2.MorphAnalyzer, text: str) -> List[str]:
-    """Учитывает знаки пунктуации, регистр и словоформы, выкидывает предлоги."""
+    """Учитывает знаки пунктуации,
+    регистр и словоформы, выкидывает предлоги."""
     words = []
     for word in text.split():
         cleaned_word = _clean_word(word)
@@ -22,13 +23,17 @@ def split_by_words(morph: pymorphy2.MorphAnalyzer, text: str) -> List[str]:
     return words
 
 
-def calculate_jaundice_rate(article_words: List[str], charged_words: List[str]) -> float:
-    """Расчитывает желтушность текста, принимает список "заряженных" слов и ищет их внутри article_words."""
+def calculate_jaundice_rate(
+        article_words: List[str],
+        charged_words: List[str]
+) -> float:
+    """Расчитывает желтушность текста,
+    принимает список "заряженных" слов и ищет их внутри article_words."""
 
     if not article_words:
         return 0.0
 
-    found_charged_words = [word for word in article_words if word in set(charged_words)]
+    found_charged_words = [w for w in article_words if w in set(charged_words)]
 
     score = len(found_charged_words) / len(article_words) * 100
 

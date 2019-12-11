@@ -8,3 +8,10 @@ install-dev:
 
 tests:
 	poetry run pytest tests -v
+
+
+lint:
+	poetry run flake8 --exclude .venv
+
+mypy:
+	poetry run mypy -p filter

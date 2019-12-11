@@ -113,6 +113,28 @@ python-versions = "*"
 version = "0.6.2"
 
 [[package]]
+category = "dev"
+description = "Discover and load entry points from installed packages."
+name = "entrypoints"
+optional = false
+python-versions = ">=2.7"
+version = "0.3"
+
+[[package]]
+category = "dev"
+description = "the modular source code checker: pep8, pyflakes and co"
+name = "flake8"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "3.7.9"
+
+[package.dependencies]
+entrypoints = ">=0.3.0,<0.4.0"
+mccabe = ">=0.6.0,<0.7.0"
+pycodestyle = ">=2.5.0,<2.6.0"
+pyflakes = ">=2.1.0,<2.2.0"
+
+[[package]]
 category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"
 name = "idna"
@@ -131,6 +153,14 @@ version = "1.3.0"
 
 [package.dependencies]
 zipp = ">=0.5"
+
+[[package]]
+category = "dev"
+description = "McCabe checker, plugin for flake8"
+name = "mccabe"
+optional = false
+python-versions = "*"
+version = "0.6.1"
 
 [[package]]
 category = "dev"
@@ -214,12 +244,28 @@ version = "3.0.0"
 cffi = ">=1.5.0"
 
 [[package]]
+category = "dev"
+description = "Python style guide checker"
+name = "pycodestyle"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "2.5.0"
+
+[[package]]
 category = "main"
 description = "C parser in Python"
 name = "pycparser"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.19"
+
+[[package]]
+category = "dev"
+description = "passive checker of Python programs"
+name = "pyflakes"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "2.1.1"
 
 [[package]]
 category = "main"
@@ -348,7 +394,7 @@ version = "0.6.0"
 more-itertools = "*"
 
 [metadata]
-content-hash = "382723a674ef4978756b4be9b51ab1e56d5e344d3c641e38f065942114426b95"
+content-hash = "15070f03670b7f4cfdfa671cfeca6c83405010ce0cb2dea5488ddaea8cdf1f78"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -364,8 +410,11 @@ chardet = ["84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae", "
 colorama = ["7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff", "e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"]
 dawg-python = ["4941d5df081b8d6fcb4597e073a9f60d5c1ccc9d17cd733e8744d7ecfec94ef3", "4a5e3286e6261cca02f205cfd5516a7ab10190fa30c51c28d345808f595e3421"]
 docopt = ["49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"]
+entrypoints = ["589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19", "c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"]
+flake8 = ["45681a117ecc81e870cbf1262835ae4af5e7a8b08e40b944a8a6e6b895914cfb", "49356e766643ad15072a789a20915d3c91dc89fd313ccd71802303fd67e4deca"]
 idna = ["c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407", "ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"]
 importlib-metadata = ["073a852570f92da5f744a3472af1b61e28e9f78ccf0c9117658dc32b15de7b45", "d95141fbfa7ef2ec65cfd945e2af7e5a6ddbd7c8d9a25e66ff3be8e3daf9f60f"]
+mccabe = ["ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42", "dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"]
 more-itertools = ["b84b238cce0d9adad5ed87e745778d20a3f8487d0f0cb8b8a586816c7496458d", "c833ef592a0324bcc6a60e48440da07645063c453880c9477ceb22490aec1564"]
 multidict = ["040159525107ef21860fce518157fd1aeccc5558f806e6db90979ae3171c9fea", "21ff895ee73dc0b2421451e5c3c1fbb2776f8ce3fcc5c5813ae1627d5f9db1e6", "2a2182f63317fc6177b9c8a4a99efbd7c284c65471c30471e1ce40c66b883768", "2b9360fd4176cab36e310aa735bb6cf61d5d18690e0bc3b6fcca28bb7694ea36", "2bb743f98c44d2b6832e9332b9dac7ad689af969a2152027cf03fd4367f45a22", "2ee222a0c83041e82b0af058807b254ca62ead65fce414c67afe67f85607a02a", "461439ad87bdb6e5d982c19079e9dd43447e48ef6f219d26884c39ed8deace75", "54558db87356599e24476711fbeba552140b789dc6028be83ae5dc3f328de4dc", "68277477927f970b79b6819fde73387a0edde057679dee36a432127dc56f264d", "85080d59ea0bf8481f81f06544a89fd36748d299eb168a5f7d48d34a094d69ca", "85218ce2f78a0b6f0124b77e63ce4d6e93bf5810c029c4b38dd91c696b2f2d44", "a1e679ca278466efd60539c82c80950eeeb8c807f38a5db4267b0cc5a4763336", "adeb140ad20ce9084db5dc5c59a7b25ad42723ad3d283a167b7411b5dfd16cb3", "c1baae5a683b28741dffbfce92ba2a2f95aabd4c85a180f6e3054ccdafb75d1c", "e14677fe316df085fa599ed1cad010e63970f98b0e53276cefb629a97372bc3c", "fae994418c0ec4c5c89f639bed686a1ec4a60010a776bcfec3b08b4ec59d8b3e", "fcfd3bd87ec8598d187b8de1c58b31940b3d08961cdd989fbc3b780d502877cd"]
 mypy = ["02d9bdd3398b636723ecb6c5cfe9773025a9ab7f34612c1cde5c7f2292e2d768", "088f758a50af31cf8b42688118077292370c90c89232c783ba7979f39ea16646", "28e9fbc96d13397a7ddb7fad7b14f373f91b5cff538e0772e77c270468df083c", "30e123b24931f02c5d99307406658ac8f9cd6746f0d45a3dcac2fe5fbdd60939", "3294821b5840d51a3cd7a2bb63b40fc3f901f6a3cfb3c6046570749c4c7ef279", "41696a7d912ce16fdc7c141d87e8db5144d4be664a0c699a2b417d393994b0c2", "4f42675fa278f3913340bb8c3371d191319704437758d7c4a8440346c293ecb2", "54d205ccce6ed930a8a2ccf48404896d456e8b87812e491cb907a355b1a9c640", "6992133c95a2847d309b4b0c899d7054adc60481df6f6b52bb7dee3d5fd157f7", "6ecbd0e8e371333027abca0922b0c2c632a5b4739a0c61ffbd0733391e39144c", "83fa87f556e60782c0fc3df1b37b7b4a840314ba1ac27f3e1a1e10cb37c89c17", "c87ac7233c629f305602f563db07f5221950fe34fe30af072ac838fa85395f78", "de9ec8dba773b78c49e7bec9a35c9b6fc5235682ad1fc2105752ae7c22f4b931", "f385a0accf353ca1bca4bbf473b9d83ed18d923fdb809d3a70a385da23e25b6a"]
@@ -374,7 +423,9 @@ packaging = ["28b924174df7a2fa32c1953825ff29c61e2f5e082343165438812f00d3a7fc47",
 pluggy = ["15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0", "966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"]
 py = ["64f65755aee5b381cea27766a3a147c3f15b9b6b9ac88676de66ba2ae36793fa", "dc639b046a6e2cff5bbe40194ad65936d6ba360b52b3c3fe1d08a82dd50b5e53"]
 pycares = ["2ca080db265ea238dc45f997f94effb62b979a617569889e265c26a839ed6305", "6f79c6afb6ce603009db2042fddc2e348ad093ece9784cbe2daa809499871a23", "70918d06eb0603016d37092a5f2c0228509eb4e6c5a3faacb4184f6ab7be7650", "755187d28d24a9ea63aa2b4c0638be31d65fbf7f0ce16d41261b9f8cb55a1b99", "7baa4b1f2146eb8423ff8303ebde3a20fb444a60db761fba0430d104fe35ddbf", "90b27d4df86395f465a171386bc341098d6d47b65944df46518814ae298f6cc6", "9e090dd6b2afa65cb51c133883b2bf2240fd0f717b130b0048714b33fb0f47ce", "a11b7d63c3718775f6e805d6464cb10943780395ab042c7e5a0a7a9f612735dd", "b253f5dcaa0ac7076b79388a3ac80dd8f3bd979108f813baade40d3a9b8bf0bd", "c7f4f65e44ba35e35ad3febc844270665bba21cfb0fb7d749434e705b556e087", "cdb342e6a254f035bd976d95807a2184038fc088d957a5104dcaab8be602c093", "cf08e164f8bfb83b9fe633feb56f2754fae6baefcea663593794fa0518f8f98c", "df9bc694cf03673878ea8ce674082c5acd134991d64d6c306d4bd61c0c1df98f"]
+pycodestyle = ["95a2219d12372f05704562a14ec30bc76b05a5b297b21a5dfe3f6fac3491ae56", "e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c"]
 pycparser = ["a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"]
+pyflakes = ["17dbeb2e3f4d772725c777fabc446d5634d1038f234e77343108ce445ea69ce0", "d976835886f8c5b31d47970ed689944a0262b5f3afa00a5a7b4dc81e5449f8a2"]
 pymorphy2 = ["3092c21f5e6f78a3a2fa54011236f975cbff8df29827ed6661cf4bde9aacdb8f", "549a1141abe01093242b9e11a1f60110ee4818f7fe57c9bb363e504339f382f5"]
 pymorphy2-dicts = ["70d3e33fa28108a2dfcded787c7a5946c6ab88bb669b3afb20f8c447aadec924", "be7c6402b5f0919c1c942f07f89a7f53c70f6266a035fa0a561b23807ac79e4a", "d563f2c7673fc28583550780e21440764eb0168b57d498ec07e346da70ce0b3c"]
 pyparsing = ["20f995ecd72f2a1f4bf6b072b63b22e2eb457836601e76d6e5dfcd75436acc1f", "4ca62001be367f01bd3e92ecbb79070272a9d4964dce6a48a82ff0b8bc7e683a"]
