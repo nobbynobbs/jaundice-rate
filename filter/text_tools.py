@@ -1,3 +1,4 @@
+import asyncio
 import string
 from typing import List
 
@@ -11,7 +12,10 @@ def _clean_word(word: str) -> str:
     return word
 
 
-def split_by_words(morph: pymorphy2.MorphAnalyzer, text: str) -> List[str]:
+async def split_by_words(
+        morph: pymorphy2.MorphAnalyzer,
+        text: str
+) -> List[str]:
     """Учитывает знаки пунктуации,
     регистр и словоформы, выкидывает предлоги."""
     words = []
@@ -20,6 +24,7 @@ def split_by_words(morph: pymorphy2.MorphAnalyzer, text: str) -> List[str]:
         normalized_word = morph.parse(cleaned_word)[0].normal_form
         if len(normalized_word) > 2 or normalized_word == 'не':
             words.append(normalized_word)
+        await asyncio.sleep(0)  # release event loop after each iteration
     return words
 
 

@@ -12,6 +12,8 @@ pymorphy2 = "^0.8.0"
 beautifulsoup4 = "^4.8"
 cchardet = "^2.1"
 aiodns = "^2.0"
+aionursery = "^0.3.0"
+async-timeout = "^3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.3"

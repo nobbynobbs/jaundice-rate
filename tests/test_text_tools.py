@@ -11,8 +11,9 @@ from filter.text_tools import split_by_words, calculate_jaundice_rate
             '«Удивительно, но это стало началом!»',
             ['удивительно', 'это', 'стать', 'начало'],
     )],  ids=["1", "2"])
-def test_split_by_words(morph, text, result):
-    assert split_by_words(morph, text) == result
+@pytest.mark.asyncio
+async def test_split_by_words(morph, text, result):
+    assert await split_by_words(morph, text) == result
 
 
 @pytest.mark.parametrize("left,right,text,words", [
