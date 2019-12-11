@@ -1,14 +1,17 @@
 import string
+from typing import List
+
+import pymorphy2
 
 
-def _clean_word(word):
+def _clean_word(word: str) -> str:
     word = word.replace('«', '').replace('»', '').replace('…', '')
     # FIXME какие еще знаки пунктуации часто встречаются ?
     word = word.strip(string.punctuation)
     return word
 
 
-def split_by_words(morph, text):
+def split_by_words(morph: pymorphy2.MorphAnalyzer, text: str) -> List[str]:
     """Учитывает знаки пунктуации, регистр и словоформы, выкидывает предлоги."""
     words = []
     for word in text.split():
@@ -19,7 +22,7 @@ def split_by_words(morph, text):
     return words
 
 
-def calculate_jaundice_rate(article_words, charged_words):
+def calculate_jaundice_rate(article_words: List[str], charged_words: List[str]) -> float:
     """Расчитывает желтушность текста, принимает список "заряженных" слов и ищет их внутри article_words."""
 
     if not article_words:
