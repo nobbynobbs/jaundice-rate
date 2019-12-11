@@ -15,6 +15,7 @@ import async_timeout
 from filter.adapters import ArticleNotFound
 from filter.adapters.inosmi_ru import sanitize
 from filter.text_tools import split_by_words, calculate_jaundice_rate
+from filter.server import server
 
 
 class ProcessingStatus(enum.Enum):
@@ -109,23 +110,25 @@ async def rate_many_articles(
     return [task.result() for task in results]
 
 
-def main() -> None:
-    morph = pymorphy2.MorphAnalyzer()
-    charged_words = read_charged_words([
-        "filter/charged_dict/negative_words.txt",
-        "filter/charged_dict/positive_words.txt",
-    ])
-    urls = [
-        "https://inosmi.ru/economic/20190629/245384784.html",
-        "https://inosmi.ru/politic/20191211/246417356.html",
-        "https://inosmi.ru/politic/20191211/246417995.html",
-        "https://inosmi.ru/politic/20191211/246417831.html",
-        "https://inosmi.ru/military/20191211/246418951.html",
-        "https://inosmi.ru/military/20191211/not_found.html",
-        "http://example.com",
-    ]
-    asyncio.run(rate_many_articles(urls, morph, charged_words))
+# def main() -> None:
+#     morph = pymorphy2.MorphAnalyzer()
+#     charged_words = read_charged_words([
+#         "filter/charged_dict/negative_words.txt",
+#         "filter/charged_dict/positive_words.txt",
+#     ])
+#     urls = [
+#         "https://inosmi.ru/economic/20190629/245384784.html",
+#         "https://inosmi.ru/politic/20191211/246417356.html",
+#         "https://inosmi.ru/politic/20191211/246417995.html",
+#         "https://inosmi.ru/politic/20191211/246417831.html",
+#         "https://inosmi.ru/military/20191211/246418951.html",
+#         "https://inosmi.ru/military/20191211/not_found.html",
+#         "http://example.com",
+#     ]
+#     asyncio.run(rate_many_articles(urls, morph, charged_words))
+
+# def main():
 
 
 if __name__ == '__main__':
-    main()
+    server.main()
