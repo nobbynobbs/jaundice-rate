@@ -1,0 +1,348 @@
+[[package]]
+category = "main"
+description = "Simple DNS resolver for asyncio"
+name = "aiodns"
+optional = false
+python-versions = "*"
+version = "2.0.0"
+
+[package.dependencies]
+pycares = ">=3.0.0"
+
+[[package]]
+category = "main"
+description = "Async http client/server framework (asyncio)"
+name = "aiohttp"
+optional = false
+python-versions = ">=3.5.3"
+version = "3.6.2"
+
+[package.dependencies]
+async-timeout = ">=3.0,<4.0"
+attrs = ">=17.3.0"
+chardet = ">=2.0,<4.0"
+multidict = ">=4.5,<5.0"
+yarl = ">=1.0,<2.0"
+
+[[package]]
+category = "main"
+description = "Timeout context manager for asyncio programs"
+name = "async-timeout"
+optional = false
+python-versions = ">=3.5.3"
+version = "3.0.1"
+
+[[package]]
+category = "dev"
+description = "Atomic file writes."
+marker = "sys_platform == \"win32\""
+name = "atomicwrites"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.3.0"
+
+[[package]]
+category = "main"
+description = "Classes Without Boilerplate"
+name = "attrs"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "19.3.0"
+
+[[package]]
+category = "main"
+description = "Screen-scraping library"
+name = "beautifulsoup4"
+optional = false
+python-versions = "*"
+version = "4.8.1"
+
+[package.dependencies]
+soupsieve = ">=1.2"
+
+[[package]]
+category = "main"
+description = "cChardet is high speed universal character encoding detector."
+name = "cchardet"
+optional = false
+python-versions = "*"
+version = "2.1.5"
+
+[[package]]
+category = "main"
+description = "Foreign Function Interface for Python calling C code."
+name = "cffi"
+optional = false
+python-versions = "*"
+version = "1.13.2"
+
+[package.dependencies]
+pycparser = "*"
+
+[[package]]
+category = "main"
+description = "Universal encoding detector for Python 2 and 3"
+name = "chardet"
+optional = false
+python-versions = "*"
+version = "3.0.4"
+
+[[package]]
+category = "dev"
+description = "Cross-platform colored terminal text."
+marker = "sys_platform == \"win32\""
+name = "colorama"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "0.4.3"
+
+[[package]]
+category = "main"
+description = "Pure-python reader for DAWGs (DAFSAs) created by dawgdic C++ library or DAWG Python extension."
+name = "dawg-python"
+optional = false
+python-versions = "*"
+version = "0.7.2"
+
+[[package]]
+category = "main"
+description = "Pythonic argument parser, that will make you smile"
+name = "docopt"
+optional = false
+python-versions = "*"
+version = "0.6.2"
+
+[[package]]
+category = "main"
+description = "Internationalized Domain Names in Applications (IDNA)"
+name = "idna"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "2.8"
+
+[[package]]
+category = "dev"
+description = "Read metadata from Python packages"
+marker = "python_version < \"3.8\""
+name = "importlib-metadata"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+version = "1.3.0"
+
+[package.dependencies]
+zipp = ">=0.5"
+
+[[package]]
+category = "dev"
+description = "More routines for operating on iterables, beyond itertools"
+name = "more-itertools"
+optional = false
+python-versions = ">=3.5"
+version = "8.0.2"
+
+[[package]]
+category = "main"
+description = "multidict implementation"
+name = "multidict"
+optional = false
+python-versions = ">=3.5"
+version = "4.7.0"
+
+[[package]]
+category = "dev"
+description = "Core utilities for Python packages"
+name = "packaging"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "19.2"
+
+[package.dependencies]
+pyparsing = ">=2.0.2"
+six = "*"
+
+[[package]]
+category = "dev"
+description = "plugin and hook calling mechanisms for python"
+name = "pluggy"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.13.1"
+
+[package.dependencies]
+[package.dependencies.importlib-metadata]
+python = "<3.8"
+version = ">=0.12"
+
+[[package]]
+category = "dev"
+description = "library with cross-python path, ini-parsing, io, code, log facilities"
+name = "py"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.8.0"
+
+[[package]]
+category = "main"
+description = "Python interface for c-ares"
+name = "pycares"
+optional = false
+python-versions = "*"
+version = "3.0.0"
+
+[package.dependencies]
+cffi = ">=1.5.0"
+
+[[package]]
+category = "main"
+description = "C parser in Python"
+name = "pycparser"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "2.19"
+
+[[package]]
+category = "main"
+description = "Morphological analyzer (POS tagger + inflection engine) for Russian language."
+name = "pymorphy2"
+optional = false
+python-versions = "*"
+version = "0.8"
+
+[package.dependencies]
+dawg-python = ">=0.7"
+docopt = ">=0.6"
+pymorphy2-dicts = ">=2.4,<3.0"
+
+[[package]]
+category = "main"
+description = "OpenCorpora.org dictionaries pre-compiled for pymorphy2"
+name = "pymorphy2-dicts"
+optional = false
+python-versions = "*"
+version = "2.4.393442.3710985"
+
+[[package]]
+category = "dev"
+description = "Python parsing module"
+name = "pyparsing"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "2.4.5"
+
+[[package]]
+category = "dev"
+description = "pytest: simple powerful testing with Python"
+name = "pytest"
+optional = false
+python-versions = ">=3.5"
+version = "5.3.1"
+
+[package.dependencies]
+atomicwrites = ">=1.0"
+attrs = ">=17.4.0"
+colorama = "*"
+more-itertools = ">=4.0.0"
+packaging = "*"
+pluggy = ">=0.12,<1.0"
+py = ">=1.5.0"
+wcwidth = "*"
+
+[package.dependencies.importlib-metadata]
+python = "<3.8"
+version = ">=0.12"
+
+[[package]]
+category = "dev"
+description = "Pytest support for asyncio."
+name = "pytest-asyncio"
+optional = false
+python-versions = ">= 3.5"
+version = "0.10.0"
+
+[package.dependencies]
+pytest = ">=3.0.6"
+
+[[package]]
+category = "dev"
+description = "Python 2 and 3 compatibility utilities"
+name = "six"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*"
+version = "1.13.0"
+
+[[package]]
+category = "main"
+description = "A modern CSS selector implementation for Beautiful Soup."
+name = "soupsieve"
+optional = false
+python-versions = "*"
+version = "1.9.5"
+
+[[package]]
+category = "dev"
+description = "Measures number of Terminal column cells of wide-character codes"
+name = "wcwidth"
+optional = false
+python-versions = "*"
+version = "0.1.7"
+
+[[package]]
+category = "main"
+description = "Yet another URL library"
+name = "yarl"
+optional = false
+python-versions = ">=3.5"
+version = "1.4.2"
+
+[package.dependencies]
+idna = ">=2.0"
+multidict = ">=4.0"
+
+[[package]]
+category = "dev"
+description = "Backport of pathlib-compatible object wrapper for zip files"
+marker = "python_version < \"3.8\""
+name = "zipp"
+optional = false
+python-versions = ">=2.7"
+version = "0.6.0"
+
+[package.dependencies]
+more-itertools = "*"
+
+[metadata]
+content-hash = "afe6b4300244c3e3234edbacaa407b64a861850aca48e11c808f3442be3119ed"
+python-versions = "^3.7"
+
+[metadata.hashes]
+aiodns = ["815fdef4607474295d68da46978a54481dd1e7be153c7d60f9e72773cd38d77d", "aaa5ac584f40fe778013df0aa6544bf157799bd3f608364b451840ed2c8688de"]
+aiohttp = ["1e984191d1ec186881ffaed4581092ba04f7c61582a177b187d3a2f07ed9719e", "259ab809ff0727d0e834ac5e8a283dc5e3e0ecc30c4d80b3cd17a4139ce1f326", "2f4d1a4fdce595c947162333353d4a44952a724fba9ca3205a3df99a33d1307a", "32e5f3b7e511aa850829fbe5aa32eb455e5534eaa4b1ce93231d00e2f76e5654", "344c780466b73095a72c616fac5ea9c4665add7fc129f285fbdbca3cccf4612a", "460bd4237d2dbecc3b5ed57e122992f60188afe46e7319116da5eb8a9dfedba4", "4c6efd824d44ae697814a2a85604d8e992b875462c6655da161ff18fd4f29f17", "50aaad128e6ac62e7bf7bd1f0c0a24bc968a0c0590a726d5a955af193544bcec", "6206a135d072f88da3e71cc501c59d5abffa9d0bb43269a6dcd28d66bfafdbdd", "65f31b622af739a802ca6fd1a3076fd0ae523f8485c52924a89561ba10c49b48", "ae55bac364c405caa23a4f2d6cfecc6a0daada500274ffca4a9230e7129eac59", "b778ce0c909a2653741cb4b1ac7015b5c130ab9c897611df43ae6a58523cb965"]
+async-timeout = ["0c3c816a028d47f659d6ff5c745cb2acf1f966da1fe5c19c77a70282b25f4c5f", "4291ca197d287d274d0b6cb5d6f8f8f82d434ed288f962539ff18cc9012f9ea3"]
+atomicwrites = ["03472c30eb2c5d1ba9227e4c2ca66ab8287fbfbbda3888aa93dc2e28fc6811b4", "75a9445bac02d8d058d5e1fe689654ba5a6556a1dfd8ce6ec55a0ed79866cfa6"]
+attrs = ["08a96c641c3a74e44eb59afb61a24f2cb9f4d7188748e76ba4bb5edfa3cb7d1c", "f7b7ce16570fe9965acd6d30101a28f62fb4a7f9e926b3bbc9b61f8b04247e72"]
+beautifulsoup4 = ["5279c36b4b2ec2cb4298d723791467e3000e5384a43ea0cdf5d45207c7e97169", "6135db2ba678168c07950f9a16c4031822c6f4aec75a65e0a97bc5ca09789931", "dcdef580e18a76d54002088602eba453eec38ebbcafafeaabd8cab12b6155d57"]
+cchardet = ["0f7ec49fcd28088c387d4afcc02c0549434d9e07deb2519365a6baa5b6c7ebb4", "1a6d00b7cbd8acfc5e3093cb5f983a667d0752dc328123c8dcb293e252bfb024", "240efe3f255f916769458343840b9c6403cf3192720bc5129792cbcb88bf72fb", "30f461d876cf3ea40c6fd949b9725c7c6e2522a3e87d33817d221e9f478d7e4d", "379a0bbd630bca677990df7509672a2ca43faf928939fd4b063fc2215b025b91", "3ae84e6ee215925cd06a772d87c17d5485d862e2f1677aa0d6c295ea9313f117", "4001620ba761b2ddd51caef6194444b5cd2f131de7c8c51a0f4896cb1ea1111a", "4bd54ff3a239b4fe598ba262d8730372e339fdd314286ceb6706a003d3e03d7b", "4d015296e96c0b2022495e4685b6fc0f3c9feed88fb062135f7f4748df7e0921", "5011ab33557913489c98d2fbdd7d88f06736f0bb456c60952fc5e52886b2a410", "6a192cce3009c9cd671588574ad0cb81322c78265ebcb33b2def63c15e44ea47", "6bf07931fa81238d9174266aaf83605204192977671ef230d5651a8f9d4acf56", "7f22a8194c4e696cea3eff28723f77858495dec52baf93261943c8bb8ce08035", "8126798ec34b9fb444472d849b6510817939347809b898a0d6d6463e41c5901a", "8e3a50bcad2ca0921fbbd46d29cc215dcc0d6d360570d594aeb7b0e2de716e8c", "92341348fed2fb53899e9cccf030da5377beb8ed26dfddc6acf87f1f0ce4b80e", "950fb40918772efe5779747a2f6c83a053a26b623a674f1d4f271b35331a9968", "a4e346151042b5cfae34fff65911842f04849be4a74f22bc52b1e99c11650210", "af48965b752490d8e330e41a46ba47f07c63f22ac5c7f4c396b7efd3958daa2e", "b5cebf47f498e5ad4a9a5ef089b7ab6ef7926eaeea0b239c8e54f8217ce81cf2", "b7cad0a062675acb42eb5170b07be774a5d9ca35a24388e918e5b78cb40ccbf2", "bb05580cd40f4cb7ccda5f90163fc43e27820046a6d0af11c1747d515fc69859", "f87bdef26758a0a8de93bbfd7651ac4fcf798a7a06c049c347a0103279698b23"]
+cffi = ["0b49274afc941c626b605fb59b59c3485c17dc776dc3cc7cc14aca74cc19cc42", "0e3ea92942cb1168e38c05c1d56b0527ce31f1a370f6117f1d490b8dcd6b3a04", "135f69aecbf4517d5b3d6429207b2dff49c876be724ac0c8bf8e1ea99df3d7e5", "19db0cdd6e516f13329cba4903368bff9bb5a9331d3410b1b448daaadc495e54", "2781e9ad0e9d47173c0093321bb5435a9dfae0ed6a762aabafa13108f5f7b2ba", "291f7c42e21d72144bb1c1b2e825ec60f46d0a7468f5346841860454c7aa8f57", "2c5e309ec482556397cb21ede0350c5e82f0eb2621de04b2633588d118da4396", "2e9c80a8c3344a92cb04661115898a9129c074f7ab82011ef4b612f645939f12", "32a262e2b90ffcfdd97c7a5e24a6012a43c61f1f5a57789ad80af1d26c6acd97", "3c9fff570f13480b201e9ab69453108f6d98244a7f495e91b6c654a47486ba43", "415bdc7ca8c1c634a6d7163d43fb0ea885a07e9618a64bda407e04b04333b7db", "42194f54c11abc8583417a7cf4eaff544ce0de8187abaf5d29029c91b1725ad3", "4424e42199e86b21fc4db83bd76909a6fc2a2aefb352cb5414833c030f6ed71b", "4a43c91840bda5f55249413037b7a9b79c90b1184ed504883b72c4df70778579", "599a1e8ff057ac530c9ad1778293c665cb81a791421f46922d80a86473c13346", "5c4fae4e9cdd18c82ba3a134be256e98dc0596af1e7285a3d2602c97dcfa5159", "5ecfa867dea6fabe2a58f03ac9186ea64da1386af2159196da51c4904e11d652", "62f2578358d3a92e4ab2d830cd1c2049c9c0d0e6d3c58322993cc341bdeac22e", "6471a82d5abea994e38d2c2abc77164b4f7fbaaf80261cb98394d5793f11b12a", "6d4f18483d040e18546108eb13b1dfa1000a089bcf8529e30346116ea6240506", "71a608532ab3bd26223c8d841dde43f3516aa5d2bf37b50ac410bb5e99053e8f", "74a1d8c85fb6ff0b30fbfa8ad0ac23cd601a138f7509dc617ebc65ef305bb98d", "7b93a885bb13073afb0aa73ad82059a4c41f4b7d8eb8368980448b52d4c7dc2c", "7d4751da932caaec419d514eaa4215eaf14b612cff66398dd51129ac22680b20", "7f627141a26b551bdebbc4855c1157feeef18241b4b8366ed22a5c7d672ef858", "8169cf44dd8f9071b2b9248c35fc35e8677451c52f795daa2bb4643f32a540bc", "aa00d66c0fab27373ae44ae26a66a9e43ff2a678bf63a9c7c1a9a4d61172827a", "ccb032fda0873254380aa2bfad2582aedc2959186cce61e3a17abc1a55ff89c3", "d754f39e0d1603b5b24a7f8484b22d2904fa551fe865fd0d4c3332f078d20d4e", "d75c461e20e29afc0aee7172a0950157c704ff0dd51613506bd7d82b718e7410", "dcd65317dd15bc0451f3e01c80da2216a31916bdcffd6221ca1202d96584aa25", "e570d3ab32e2c2861c4ebe6ffcad6a8abf9347432a37608fe1fbd157b3f0036b", "fd43a88e045cf992ed09fa724b5315b790525f2676883a6ea64e3263bae6549d"]
+chardet = ["84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae", "fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"]
+colorama = ["7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff", "e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"]
+dawg-python = ["4941d5df081b8d6fcb4597e073a9f60d5c1ccc9d17cd733e8744d7ecfec94ef3", "4a5e3286e6261cca02f205cfd5516a7ab10190fa30c51c28d345808f595e3421"]
+docopt = ["49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"]
+idna = ["c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407", "ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"]
+importlib-metadata = ["073a852570f92da5f744a3472af1b61e28e9f78ccf0c9117658dc32b15de7b45", "d95141fbfa7ef2ec65cfd945e2af7e5a6ddbd7c8d9a25e66ff3be8e3daf9f60f"]
+more-itertools = ["b84b238cce0d9adad5ed87e745778d20a3f8487d0f0cb8b8a586816c7496458d", "c833ef592a0324bcc6a60e48440da07645063c453880c9477ceb22490aec1564"]
+multidict = ["040159525107ef21860fce518157fd1aeccc5558f806e6db90979ae3171c9fea", "21ff895ee73dc0b2421451e5c3c1fbb2776f8ce3fcc5c5813ae1627d5f9db1e6", "2a2182f63317fc6177b9c8a4a99efbd7c284c65471c30471e1ce40c66b883768", "2b9360fd4176cab36e310aa735bb6cf61d5d18690e0bc3b6fcca28bb7694ea36", "2bb743f98c44d2b6832e9332b9dac7ad689af969a2152027cf03fd4367f45a22", "2ee222a0c83041e82b0af058807b254ca62ead65fce414c67afe67f85607a02a", "461439ad87bdb6e5d982c19079e9dd43447e48ef6f219d26884c39ed8deace75", "54558db87356599e24476711fbeba552140b789dc6028be83ae5dc3f328de4dc", "68277477927f970b79b6819fde73387a0edde057679dee36a432127dc56f264d", "85080d59ea0bf8481f81f06544a89fd36748d299eb168a5f7d48d34a094d69ca", "85218ce2f78a0b6f0124b77e63ce4d6e93bf5810c029c4b38dd91c696b2f2d44", "a1e679ca278466efd60539c82c80950eeeb8c807f38a5db4267b0cc5a4763336", "adeb140ad20ce9084db5dc5c59a7b25ad42723ad3d283a167b7411b5dfd16cb3", "c1baae5a683b28741dffbfce92ba2a2f95aabd4c85a180f6e3054ccdafb75d1c", "e14677fe316df085fa599ed1cad010e63970f98b0e53276cefb629a97372bc3c", "fae994418c0ec4c5c89f639bed686a1ec4a60010a776bcfec3b08b4ec59d8b3e", "fcfd3bd87ec8598d187b8de1c58b31940b3d08961cdd989fbc3b780d502877cd"]
+packaging = ["28b924174df7a2fa32c1953825ff29c61e2f5e082343165438812f00d3a7fc47", "d9551545c6d761f3def1677baf08ab2a3ca17c56879e70fecba2fc4dde4ed108"]
+pluggy = ["15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0", "966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"]
+py = ["64f65755aee5b381cea27766a3a147c3f15b9b6b9ac88676de66ba2ae36793fa", "dc639b046a6e2cff5bbe40194ad65936d6ba360b52b3c3fe1d08a82dd50b5e53"]
+pycares = ["2ca080db265ea238dc45f997f94effb62b979a617569889e265c26a839ed6305", "6f79c6afb6ce603009db2042fddc2e348ad093ece9784cbe2daa809499871a23", "70918d06eb0603016d37092a5f2c0228509eb4e6c5a3faacb4184f6ab7be7650", "755187d28d24a9ea63aa2b4c0638be31d65fbf7f0ce16d41261b9f8cb55a1b99", "7baa4b1f2146eb8423ff8303ebde3a20fb444a60db761fba0430d104fe35ddbf", "90b27d4df86395f465a171386bc341098d6d47b65944df46518814ae298f6cc6", "9e090dd6b2afa65cb51c133883b2bf2240fd0f717b130b0048714b33fb0f47ce", "a11b7d63c3718775f6e805d6464cb10943780395ab042c7e5a0a7a9f612735dd", "b253f5dcaa0ac7076b79388a3ac80dd8f3bd979108f813baade40d3a9b8bf0bd", "c7f4f65e44ba35e35ad3febc844270665bba21cfb0fb7d749434e705b556e087", "cdb342e6a254f035bd976d95807a2184038fc088d957a5104dcaab8be602c093", "cf08e164f8bfb83b9fe633feb56f2754fae6baefcea663593794fa0518f8f98c", "df9bc694cf03673878ea8ce674082c5acd134991d64d6c306d4bd61c0c1df98f"]
+pycparser = ["a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"]
+pymorphy2 = ["3092c21f5e6f78a3a2fa54011236f975cbff8df29827ed6661cf4bde9aacdb8f", "549a1141abe01093242b9e11a1f60110ee4818f7fe57c9bb363e504339f382f5"]
+pymorphy2-dicts = ["70d3e33fa28108a2dfcded787c7a5946c6ab88bb669b3afb20f8c447aadec924", "be7c6402b5f0919c1c942f07f89a7f53c70f6266a035fa0a561b23807ac79e4a", "d563f2c7673fc28583550780e21440764eb0168b57d498ec07e346da70ce0b3c"]
+pyparsing = ["20f995ecd72f2a1f4bf6b072b63b22e2eb457836601e76d6e5dfcd75436acc1f", "4ca62001be367f01bd3e92ecbb79070272a9d4964dce6a48a82ff0b8bc7e683a"]
+pytest = ["63344a2e3bce2e4d522fd62b4fdebb647c019f1f9e4ca075debbd13219db4418", "f67403f33b2b1d25a6756184077394167fe5e2f9d8bdaab30707d19ccec35427"]
+pytest-asyncio = ["9fac5100fd716cbecf6ef89233e8590a4ad61d729d1732e0a96b84182df1daaf", "d734718e25cfc32d2bf78d346e99d33724deeba774cc4afdf491530c6184b63b"]
+six = ["1f1b7d42e254082a9db6279deae68afb421ceba6158efa6131de7b3003ee93fd", "30f610279e8b2578cab6db20741130331735c781b56053c59c4076da27f06b66"]
+soupsieve = ["bdb0d917b03a1369ce964056fc195cfdff8819c40de04695a80bc813c3cfa1f5", "e2c1c5dee4a1c36bcb790e0fabd5492d874b8ebd4617622c4f6a731701060dda"]
+wcwidth = ["3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e", "f4ebe71925af7b40a864553f761ed559b43544f8f71746c2d756c7fe788ade7c"]
+yarl = ["0c2ab325d33f1b824734b3ef51d4d54a54e0e7a23d13b86974507602334c2cce", "0ca2f395591bbd85ddd50a82eb1fde9c1066fafe888c5c7cc1d810cf03fd3cc6", "2098a4b4b9d75ee352807a95cdf5f10180db903bc5b7270715c6bbe2551f64ce", "25e66e5e2007c7a39541ca13b559cd8ebc2ad8fe00ea94a2aad28a9b1e44e5ae", "26d7c90cb04dee1665282a5d1a998defc1a9e012fdca0f33396f81508f49696d", "308b98b0c8cd1dfef1a0311dc5e38ae8f9b58349226aa0533f15a16717ad702f", "3ce3d4f7c6b69c4e4f0704b32eca8123b9c58ae91af740481aa57d7857b5e41b", "58cd9c469eced558cd81aa3f484b2924e8897049e06889e8ff2510435b7ef74b", "5b10eb0e7f044cf0b035112446b26a3a2946bca9d7d7edb5e54a2ad2f6652abb", "6faa19d3824c21bcbfdfce5171e193c8b4ddafdf0ac3f129ccf0cdfcb083e462", "944494be42fa630134bf907714d40207e646fd5a94423c90d5b514f7b0713fea", "a161de7e50224e8e3de6e184707476b5a989037dcb24292b391a3d66ff158e70", "a4844ebb2be14768f7994f2017f70aca39d658a96c786211be5ddbe1c68794c1", "c2b509ac3d4b988ae8769901c66345425e361d518aecbe4acbfc2567e416626a", "c9959d49a77b0e07559e579f38b2f3711c2b8716b8410b320bf9713013215a1b", "d8cdee92bc930d8b09d8bd2043cedd544d9c8bd7436a77678dd602467a993080", "e15199cdb423316e15f108f51249e44eb156ae5dba232cb73be555324a1d49c2"]
+zipp = ["3718b1cbcd963c7d4c5511a8240812904164b7f381b647143a89d3b98f9bcd8e", "f06903e9f1f43b12d371004b4ac7b06ab39a44adc747266928ae6debfa7b3335"]

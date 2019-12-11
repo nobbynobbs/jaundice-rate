@@ -1,0 +1,11 @@
+### IDE and Editors
+.idea/
+.vscode/
+
+### Cache and other generated things
+*.py[co]
+__pycache__/
+.python-version
+.venv/
+*.egg-info/
+.pytest_cache

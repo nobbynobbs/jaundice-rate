@@ -8,10 +8,15 @@ async def fetch(session, url):
         return await response.text()
 
 
-async def main():
+async def fetch_article(url: str):
     async with aiohttp.ClientSession() as session:
-        html = await fetch(session, 'http://example.com')
+        html = await fetch(session, url)
         print(html)
 
 
-asyncio.run(main())
+def main():
+    asyncio.run(fetch_article('http://example.com'))
+
+
+if __name__ == '__main__':
+    main()
