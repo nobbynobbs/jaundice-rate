@@ -4,9 +4,12 @@
 
 ### Cache and other generated things
 *.py[co]
-__pycache__/
 .python-version
+.coverage
+__pycache__/
 .venv/
 *.egg-info/
 .pytest_cache
 .mypy_cache
+htmlcov/
+

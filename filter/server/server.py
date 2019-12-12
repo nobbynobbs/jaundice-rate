@@ -1,21 +1,13 @@
 import dataclasses
-from typing import Coroutine, Any, Union, List, Optional, Callable
+from typing import AsyncGenerator
 
 import aiohttp
 import aiohttp.web as web
 import pymorphy2
 
 from filter.main import rate_many_articles, read_charged_words
-
-
-def split_urls(urls_string: Optional[str]) -> List[str]:
-    """converts string of comma separated strings into
-    alphabetically sorted list of strings. also drops duplicates
-    sorting is used to make function be pure.
-    """
-    if urls_string is None:
-        return []
-    return sorted({x.strip() for x in urls_string.split(",") if x.strip()})
+from filter.server.middlewares import error_middleware
+from filter.server.utils import split_urls
 
 
 async def handle_news_list(request: web.Request) -> web.Response:
@@ -46,20 +38,8 @@ async def handle_news_list(request: web.Request) -> web.Response:
     return web.json_response(jsonified_results)
 
 
-async def error_middleware(
-        _: web.Application,
-        handler: Any
-) -> Callable[[web.Request], Coroutine[Any, Any, Union[web.Response, Any]]]:
-    async def middleware_handler(req: web.Request) -> Union[web.Response, Any]:
-        try:
-            return await handler(req)
-        except web.HTTPException as ex:
-            return web.json_response({"error": ex.text}, status=ex.status_code)
-    return middleware_handler
-
-
-async def aiohttp_client(app):
-    """reusable aiohttp client session"""
+async def aiohttp_client(app: web.Application) -> AsyncGenerator[None, None]:
+    """reusable aiohttp client session, see cleanup_ctx"""
     async with aiohttp.ClientSession() as session:
         app["http_client"] = session
         yield
