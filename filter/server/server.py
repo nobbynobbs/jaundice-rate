@@ -1,13 +1,15 @@
-import dataclasses
+import os.path
 from typing import AsyncGenerator
 
 import aiohttp
 import aiohttp.web as web
 import pymorphy2
 
+from filter import BASE_DIR
 from filter.main import rate_many_articles, read_charged_words
-from filter.server.middlewares import error_middleware
-from filter.server.utils import split_urls
+from .encoder import dumps
+from .middlewares import error_middleware
+from .utils import split_urls
 
 
 async def handle_news_list(request: web.Request) -> web.Response:
@@ -32,10 +34,7 @@ async def handle_news_list(request: web.Request) -> web.Response:
         request_timeout=2,
         processing_timeout=3,
     )
-    jsonified_results = [dataclasses.asdict(r) for r in results]
-    for x in jsonified_results:
-        x["status"] = x["status"].value
-    return web.json_response(jsonified_results)
+    return web.json_response(results, dumps=dumps)
 
 
 async def aiohttp_client(app: web.Application) -> AsyncGenerator[None, None]:
@@ -47,8 +46,8 @@ async def aiohttp_client(app: web.Application) -> AsyncGenerator[None, None]:
 
 def get_app() -> web.Application:
     charged_words = read_charged_words([
-        "filter/charged_dict/negative_words.txt",
-        "filter/charged_dict/positive_words.txt",
+        os.path.join(BASE_DIR, "charged_dict/negative_words.txt"),
+        os.path.join(BASE_DIR, "charged_dict/positive_words.txt"),
     ])
 
     app = web.Application(middlewares=[error_middleware])
