@@ -61,33 +61,34 @@ async def fetch_article(
 
 async def rate_article(
         url: str,
+        session: aiohttp.ClientSession,
         morph: pymorphy2.MorphAnalyzer,
         charged_words: List[str],
         request_timeout: float = 2,
         processing_timeout: float = 3,
 ) -> Result:
-    async with aiohttp.ClientSession() as session:
-        try:
-            async with async_timeout.timeout(request_timeout):
-                raw_html = await fetch_article(session, url)
-            article_text = sanitize(raw_html, plaintext=True)
-            async with async_timeout.timeout(processing_timeout):
-                with timer():
-                    words = await split_by_words(morph, article_text)
-        except asyncio.TimeoutError:
-            result = Result(ProcessingStatus.TIMEOUT, url)
-        except aiohttp.ClientError:
-            result = Result(ProcessingStatus.FETCH_ERROR, url)
-        except ArticleNotFound:
-            result = Result(ProcessingStatus.PARSING_ERROR, url)
-        else:
-            score = calculate_jaundice_rate(words, charged_words)
-            result = Result(ProcessingStatus.OK, url, score, len(words))
-        return result
+    try:
+        async with async_timeout.timeout(request_timeout):
+            raw_html = await fetch_article(session, url)
+        article_text = sanitize(raw_html, plaintext=True)
+        async with async_timeout.timeout(processing_timeout):
+            with timer():
+                words = await split_by_words(morph, article_text)
+    except asyncio.TimeoutError:
+        result = Result(ProcessingStatus.TIMEOUT, url)
+    except aiohttp.ClientError:
+        result = Result(ProcessingStatus.FETCH_ERROR, url)
+    except ArticleNotFound:
+        result = Result(ProcessingStatus.PARSING_ERROR, url)
+    else:
+        score = calculate_jaundice_rate(words, charged_words)
+        result = Result(ProcessingStatus.OK, url, score, len(words))
+    return result
 
 
 async def rate_many_articles(
         urls: List[str],
+        session: aiohttp.ClientSession,
         morph: pymorphy2.MorphAnalyzer,
         charged_words: List[str],
         request_timeout: float = 2,
@@ -98,6 +99,7 @@ async def rate_many_articles(
             nursery.start_soon(
                 rate_article(
                     url=url,
+                    session=session,
                     morph=morph,
                     charged_words=charged_words,
                     request_timeout=request_timeout,
@@ -107,25 +109,3 @@ async def rate_many_articles(
         ]
         results, _ = await asyncio.wait(tasks)
     return [task.result() for task in results]
-
-
-def main() -> None:
-    morph = pymorphy2.MorphAnalyzer()
-    charged_words = read_charged_words([
-        "filter/charged_dict/negative_words.txt",
-        "filter/charged_dict/positive_words.txt",
-    ])
-    urls = [
-        "https://inosmi.ru/economic/20190629/245384784.html",
-        "https://inosmi.ru/politic/20191211/246417356.html",
-        "https://inosmi.ru/politic/20191211/246417995.html",
-        "https://inosmi.ru/politic/20191211/246417831.html",
-        "https://inosmi.ru/military/20191211/246418951.html",
-        "https://inosmi.ru/military/20191211/not_found.html",
-        "http://example.com",
-    ]
-    asyncio.run(rate_many_articles(urls, morph, charged_words))
-
-
-if __name__ == '__main__':
-    main()

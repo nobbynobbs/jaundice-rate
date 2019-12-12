@@ -1,6 +1,7 @@
 import dataclasses
 from typing import Coroutine, Any, Union, List, Optional, Callable
 
+import aiohttp
 import aiohttp.web as web
 import pymorphy2
 
@@ -33,6 +34,7 @@ async def handle_news_list(request: web.Request) -> web.Response:
 
     results = await rate_many_articles(
         urls=urls,
+        session=request.app["http_client"],
         morph=request.app["morph"],
         charged_words=request.app["charged_words"],
         request_timeout=2,
@@ -56,7 +58,14 @@ async def error_middleware(
     return middleware_handler
 
 
-def main() -> None:
+async def aiohttp_client(app):
+    """reusable aiohttp client session"""
+    async with aiohttp.ClientSession() as session:
+        app["http_client"] = session
+        yield
+
+
+def get_app() -> web.Application:
     charged_words = read_charged_words([
         "filter/charged_dict/negative_words.txt",
         "filter/charged_dict/positive_words.txt",
@@ -67,7 +76,13 @@ def main() -> None:
     app["charged_words"] = charged_words
 
     app.add_routes([web.get('/', handle_news_list)])
+    app.cleanup_ctx.append(aiohttp_client)
 
+    return app
+
+
+def main() -> None:
+    app = get_app()
     web.run_app(app)
 
 
