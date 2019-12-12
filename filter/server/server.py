@@ -1,6 +1,5 @@
 import dataclasses
-from collections import Callable
-from typing import Coroutine, Any, Union
+from typing import Coroutine, Any, Union, List, Optional, Callable
 
 import aiohttp.web as web
 import pymorphy2
@@ -8,16 +7,29 @@ import pymorphy2
 from filter.main import rate_many_articles, read_charged_words
 
 
+def split_urls(urls_string: Optional[str]) -> List[str]:
+    """converts string of comma separated strings into
+    alphabetically sorted list of strings. also drops duplicates
+    sorting is used to make function be pure.
+    """
+    if urls_string is None:
+        return []
+    return sorted({x.strip() for x in urls_string.split(",") if x.strip()})
+
+
 async def handle_news_list(request: web.Request) -> web.Response:
+
     urls_string = request.query.get("urls")
-    if not urls_string:
+
+    urls = split_urls(urls_string)
+    if not urls:
         raise web.HTTPBadRequest(text="should be at least one url")
 
-    urls = urls_string.split(",")
-    if len(urls) > 9:
-        raise web.HTTPBadRequest(
-            text="too many urls in request, should be 10 or less"
-        )
+    urls_limit = 10  # TODO take from config
+    urls_count = len(urls)
+    if urls_count > urls_limit:
+        msg = f"too many urls in request, should be less than {urls_limit}"
+        raise web.HTTPBadRequest(text=msg)
 
     results = await rate_many_articles(
         urls=urls,

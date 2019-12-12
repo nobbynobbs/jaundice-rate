@@ -27,7 +27,7 @@ make install     # install only runtime dependencies
 # Как запустить
 
 ```bash
-poetry run filter
+poetry run serve  #  run aiohttp-based server
 ```
 
 # Как запустить тесты

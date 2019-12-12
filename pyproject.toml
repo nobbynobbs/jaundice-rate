@@ -23,6 +23,7 @@ flake8 = "^3.7"
 
 [tool.poetry.scripts]
 filter = "filter.main:main"
+serve = "filter.server.server:main"
 
 [build-system]
 requires = ["poetry>=0.12"]
