@@ -5,6 +5,8 @@ import aiohttp
 import aiohttp.web as web
 import pymorphy2
 
+from aiohttp_cache import cache, setup_cache, RedisConfig
+
 from filter import BASE_DIR
 from filter.main import rate_many_articles, read_charged_words
 from .encoder import dumps
@@ -13,6 +15,7 @@ from .utils import split_urls, is_url
 from .args import get_args, Config
 
 
+@cache(expires=60)
 async def handle_news_list(request: web.Request) -> web.Response:
 
     urls_string = request.query.get("urls")
@@ -68,6 +71,13 @@ def get_app(config: Optional[Config] = None) -> web.Application:
 
     app.add_routes([web.get('/', handle_news_list)])
     app.cleanup_ctx.append(aiohttp_client)
+
+    if config.redis_host:
+        cache_config = RedisConfig(
+            host=config.redis_host,
+            port=config.redis_port,
+        )
+        setup_cache(app, "redis", backend_config=cache_config)
 
     return app
 
