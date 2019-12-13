@@ -19,6 +19,21 @@ async def test_no_urls(filter_app: aiohttp.ClientSession):
     assert resp.content_type == "application/json"
 
 
+async def test_invalid_url(filter_app: aiohttp.ClientSession):
+    urls = [
+        "https://inosmi.ru/economic/20190629/245384784.html",
+        "https://inosmi.ru/politic/20191211/246417356.html",
+        "https it is obviously not an url",
+    ]
+    params = {
+        "urls": ",".join(urls)
+    }
+    resp: aiohttp.ClientResponse = await filter_app.get("/", params=params)
+    assert resp.status == 400
+    assert "should contain urls only" in await resp.text()
+    assert resp.content_type == "application/json"
+
+
 async def test_too_many_urls(filter_app: aiohttp.ClientSession):
     urls = [
         "https://inosmi.ru/economic/20190629/245384784.html",

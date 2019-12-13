@@ -2,7 +2,7 @@
 
 import pytest
 
-from filter.server.utils import split_urls
+from filter.server.utils import split_urls, is_url
 
 cases = {
     "None": (None, []),
@@ -29,3 +29,16 @@ cases = {
 )
 def test_extract_urls(query, expected):
     assert split_urls(query) == expected
+
+
+@pytest.mark.parametrize(
+    "url,result",
+    [
+        ("http://example.com", True),
+        ("https://example.com", True),
+        ("HttPS://eXample.com", True),  # sorry
+        ("httpexample", False),
+    ]
+)
+def test_is_url(url: str, result: bool):
+    assert is_url(url) == result

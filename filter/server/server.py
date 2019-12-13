@@ -9,7 +9,7 @@ from filter import BASE_DIR
 from filter.main import rate_many_articles, read_charged_words
 from .encoder import dumps
 from .middlewares import error_middleware
-from .utils import split_urls
+from .utils import split_urls, is_url
 from .args import get_args, Config
 
 
@@ -20,6 +20,9 @@ async def handle_news_list(request: web.Request) -> web.Response:
     urls = split_urls(urls_string)
     if not urls:
         raise web.HTTPBadRequest(text="should be at least one url")
+
+    if not all(is_url(x) for x in urls):
+        raise web.HTTPBadRequest(text="should contain urls only")
 
     config: Config = request.app["filter_config"]
     urls_limit = config.urls_limit
