@@ -14,8 +14,8 @@ cchardet = "^2.1"
 aiodns = "^2.0"
 aionursery = "^0.3.0"
 async-timeout = "^3.0"
-aiohttp-cache = {git = "https://github.com/cr0hn/aiohttp-cache.git", rev = "9670a3d42ccadd959ec460e2a4e20bfa01ffa295"}
 aioredis = "^1.3.1"
+aiocache = {extras = ["redis"], version = "^0.11.1"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.3"

@@ -5,17 +5,19 @@ import aiohttp
 import aiohttp.web as web
 import pymorphy2
 
-from aiohttp_cache import cache, setup_cache, RedisConfig
+from aiocache import Cache
+from aiocache.serializers import PickleSerializer
 
 from filter import BASE_DIR
 from filter.main import rate_many_articles, read_charged_words
 from .encoder import dumps
-from .middlewares import error_middleware
+from .middlewares import error_middleware, cache_middleware
+from filter.server.decorators import cached
 from .utils import split_urls, is_url
 from .args import get_args, Config
 
 
-@cache(expires=60)
+@cached
 async def handle_news_list(request: web.Request) -> web.Response:
 
     urls_string = request.query.get("urls")
@@ -73,11 +75,16 @@ def get_app(config: Optional[Config] = None) -> web.Application:
     app.cleanup_ctx.append(aiohttp_client)
 
     if config.redis_host:
-        cache_config = RedisConfig(
-            host=config.redis_host,
+        cache = Cache(
+            Cache.REDIS,
+            serializer=PickleSerializer(),
+            endpoint=config.redis_host,
             port=config.redis_port,
+            namespace="main",
+            ttl=60,
         )
-        setup_cache(app, "redis", backend_config=cache_config)
+        app["cache"] = cache
+        app.middlewares.append(cache_middleware)
 
     return app
 

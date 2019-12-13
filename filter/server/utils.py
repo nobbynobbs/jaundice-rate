@@ -1,5 +1,9 @@
 import re
+from _sha256 import sha256
 from typing import Optional, List, Pattern
+
+import aiohttp
+import aiohttp.web
 
 # oversimplified approach, just better than nothing
 URLS_REGEX = re.compile(r"^https?://\w+", flags=re.IGNORECASE)
@@ -20,3 +24,15 @@ def is_url(
         regexp: Pattern = URLS_REGEX
 ) -> bool:
     return bool(regexp.match(url))
+
+
+def make_key(request: aiohttp.web.Request) -> str:
+    key_parts: List[str] = [
+        request.method,
+        request.rel_url.path_qs,
+        request.url.host,
+        request.content_type,
+    ]
+    key = "#".join(part for part in key_parts)
+    key = sha256(key.encode()).hexdigest()
+    return key
