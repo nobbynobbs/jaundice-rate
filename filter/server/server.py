@@ -84,7 +84,7 @@ def get_app(config: Optional[Config] = None) -> web.Application:
             ttl=60,
         )
         app["cache"] = cache
-        app.middlewares.append(cache_middleware)
+        app.middlewares.insert(0, cache_middleware)
 
     return app
 

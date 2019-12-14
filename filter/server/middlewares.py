@@ -34,11 +34,19 @@ async def cache_middleware(request: web.Request, handler: Any) -> web.Response:
     cache: BaseCache = request.app["cache"]
 
     key = make_key(request)
-    resp: web.Response = await cache.get(key)
-    if resp is not None:
-        return resp
+    try:
+        resp: web.Response = await cache.get(key)
+    except Exception:  # noqa
+        logging.error("cache reading error, check if cache backend is ok")
+    else:
+        if resp is not None:
+            return resp
 
     resp = await handler(request)
-    await cache.add(key, resp)
+
+    try:
+        await cache.add(key, resp)
+    except Exception:  # noqa
+        logging.error("cache writing error, check if cache backend is ok")
 
     return resp
