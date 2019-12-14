@@ -25,8 +25,8 @@ async def cache_middleware(request: web.Request, handler: Any) -> web.Response:
 
     # here we check attribute from real request handler,
     # but after using handler from argument for fetching response
-    # thus we're respecting all the other middlewares...
-    # but it might be wrong
+    # thus we're respecting all the other middlewares... likely
+    # I've wrote quite detailed test, so I'm almost sure it works as expected
     real_handler = request.match_info.handler
     if getattr(real_handler, "cached", None) is None:
         return await handler(request)
@@ -36,7 +36,7 @@ async def cache_middleware(request: web.Request, handler: Any) -> web.Response:
     key = make_key(request)
     resp: web.Response = await cache.get(key)
     if resp is not None:
-        return resp    # works with GET requests only
+        return resp
 
     resp = await handler(request)
     await cache.add(key, resp)
