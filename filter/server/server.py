@@ -5,19 +5,18 @@ import aiohttp
 import aiohttp.web as web
 import pymorphy2
 
-from aiocache import Cache
+from aiocache import cached, Cache
 from aiocache.serializers import PickleSerializer
 
-from filter import BASE_DIR
-from filter.main import rate_many_articles, read_charged_words
+
+from filter import BASE_DIR, main as main_module
+from filter.main import rate_many_articles, read_charged_words, rate_article
 from .encoder import dumps
-from .middlewares import error_middleware, cache_middleware
-from filter.server.decorators import cached
+from .middlewares import error_middleware
 from .utils import split_urls, is_url
 from .args import get_args, Config
 
 
-@cached
 async def handle_news_list(request: web.Request) -> web.Response:
 
     urls_string = request.query.get("urls")
@@ -75,16 +74,18 @@ def get_app(config: Optional[Config] = None) -> web.Application:
     app.cleanup_ctx.append(aiohttp_client)
 
     if config.redis_host:
-        cache = Cache(
-            Cache.REDIS,
+        # decorating function the hard way
+        # I just can't afford to myself to apply
+        # this decorator directly in module in import time
+        cache_decorator = cached(
+            cache=Cache.REDIS,
             serializer=PickleSerializer(),
             endpoint=config.redis_host,
             port=config.redis_port,
             namespace="main",
             ttl=60,
         )
-        app["cache"] = cache
-        app.middlewares.insert(0, cache_middleware)
+        main_module.rate_article = cache_decorator(rate_article)
 
     return app
 
