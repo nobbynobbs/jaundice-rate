@@ -4,7 +4,7 @@ from unittest.mock import patch
 import aiohttp
 import pymorphy2
 
-from filter.main import rate_article, ProcessingStatus
+from filter.main import score_article, ProcessingStatus
 
 
 async def sleeper(*args, **kwargs):
@@ -32,7 +32,7 @@ async def broken_fetcher(*args, **kwargs):
 async def test_fetch_timeout():
     with patch("filter.main.fetch_article") as mock:
         mock.side_effect = sleeper
-        res = await rate_article(
+        res = await score_article(
             url="http://example.com/",
             session=None,
             morph=None,
@@ -46,7 +46,7 @@ async def test_fetch_timeout():
 async def test_parse_error():
     with patch("filter.main.fetch_article") as fetch_mock:
         fetch_mock.side_effect = bad_fetcher
-        res = await rate_article(
+        res = await score_article(
             url="http://example.com/",
             session=None,
             morph=None,
@@ -60,7 +60,7 @@ async def test_parse_error():
 async def test_fetch_error():
     with patch("filter.main.fetch_article") as fetch_mock:
         fetch_mock.side_effect = broken_fetcher
-        res = await rate_article(
+        res = await score_article(
             url="http://example.com/",
             session=None,
             morph=None,
@@ -76,7 +76,7 @@ async def test_processing_timeout():
         fetch_mock.side_effect = good_fetcher
         with patch("filter.main.split_by_words") as split_mock:
             split_mock.side_effect = sleeper
-            res = await rate_article(
+            res = await score_article(
                 url="http://example.com/",
                 session=None,
                 morph=None,
@@ -91,7 +91,7 @@ async def test_happy_path():
     with patch("filter.main.fetch_article") as fetch_mock:
         fetch_mock.side_effect = good_fetcher
         url = "https://inosmi.ru/economic/20190629/245384784.html"
-        res = await rate_article(
+        res = await score_article(
             url=url,
             session=None,
             morph=pymorphy2.MorphAnalyzer(),

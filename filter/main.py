@@ -5,7 +5,9 @@ import dataclasses
 import logging
 import time
 
-from typing import List, Optional, Generator
+from typing import (
+    List, Optional, Generator, Coroutine, Any, TYPE_CHECKING
+)
 
 import aiohttp
 import aionursery
@@ -15,6 +17,9 @@ import async_timeout
 from filter.adapters import ArticleNotFound
 from filter.adapters.inosmi_ru import sanitize
 from filter.text_tools import split_by_words, calculate_jaundice_rate
+
+if TYPE_CHECKING:
+    from typing_extensions import Protocol
 
 
 class ProcessingStatus(enum.Enum):
@@ -59,7 +64,7 @@ async def fetch_article(
         return await response.text()
 
 
-async def rate_article(
+async def score_article(
         url: str,
         session: aiohttp.ClientSession,
         morph: pymorphy2.MorphAnalyzer,
@@ -85,27 +90,53 @@ async def rate_article(
         result = Result(ProcessingStatus.OK, url, score, len(words))
     return result
 
+# module typing_extensions is not available in runtime, so add this check
+if TYPE_CHECKING:
+    class ArticleScorerStrategy(Protocol):
+        """type for callable with kwargs"""
+        def __call__(
+                self,
+                url: str,
+                session: aiohttp.ClientSession,
+                morph: pymorphy2.MorphAnalyzer,
+                charged_words: List[str],
+                request_timeout: float = 2,
+                processing_timeout: float = 3,
+        ) -> Coroutine[Any, Any, Result]: ...
+else:
+    ArticleScorerStrategy = None
 
-async def rate_many_articles(
-        urls: List[str],
-        session: aiohttp.ClientSession,
-        morph: pymorphy2.MorphAnalyzer,
-        charged_words: List[str],
-        request_timeout: float = 2,
-        processing_timeout: float = 3,
-) -> List[Result]:
-    async with aionursery.Nursery() as nursery:
-        tasks = [
-            nursery.start_soon(
-                rate_article(
-                    url=url,
-                    session=session,
-                    morph=morph,
-                    charged_words=charged_words,
-                    request_timeout=request_timeout,
-                    processing_timeout=processing_timeout,
-                )
-            ) for url in urls
-        ]
-        results, _ = await asyncio.wait(tasks)
-    return [task.result() for task in results]
+
+class ArticlesScorer:
+    def __init__(
+            self,
+            charged_words: List[str],
+            morph: pymorphy2.MorphAnalyzer,
+            score_article: ArticleScorerStrategy = score_article
+    ) -> None:
+        self.charged_words = charged_words
+        self.morph = morph
+        self.score_article = score_article
+
+    async def score_many_articles(
+            self,
+            urls: List[str],
+            session: aiohttp.ClientSession,
+            request_timeout: float = 2,
+            processing_timeout: float = 3,
+    ) -> List[Result]:
+        async with aionursery.Nursery() as nursery:
+            tasks = [
+                nursery.start_soon(
+                    self.score_article(
+                        url=url,
+                        session=session,
+                        morph=self.morph,
+                        charged_words=self.charged_words,
+                        request_timeout=request_timeout,
+                        processing_timeout=processing_timeout,
+                    )
+                ) for url in urls
+            ]
+            results, _ = await asyncio.wait(tasks)
+        return [task.result() for task in results]
